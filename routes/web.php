@@ -23,3 +23,15 @@ Route::get('logout', function(){
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:ADMIN']], function(){
+    Route::get('/', 'AdminController@index');
+    Route::get('/tambah-pupuk', 'PupukController@create');
+    Route::get('/penjadwalan', 'AdminController@showPenjadwalan');
+    Route::get('/pemesanan', 'AdminController@showPemesanan');
+    Route::get('/pelanggan', 'AdminController@showPelanggan');
+});
+
+Route::get('/test', function(){
+   return \Illuminate\Support\Facades\Auth::user()->getRole();
+});
