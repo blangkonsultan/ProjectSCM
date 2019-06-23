@@ -7,16 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property int $id
  * @property int $id_user
- * @property int $id_jenis
+ * @property int $id_penjualan
  * @property int $id_status
- * @property int $id_barang
  * @property string $tgl_pesan
  * @property int $jumlah
  * @property int $total_harga
- * @property StatusBayar $statusBayar
  * @property User $user
- * @property JenisBarang $jenisBarang
  * @property Status $status
+ * @property Penjualan $penjualan
  * @property Pembayaran[] $pembayarans
  */
 class Pemesanan extends Model
@@ -31,15 +29,7 @@ class Pemesanan extends Model
     /**
      * @var array
      */
-    protected $fillable = ['id_user', 'id_jenis', 'id_status', 'id_barang', 'tgl_pesan', 'jumlah', 'total_harga'];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function statusBayar()
-    {
-        return $this->belongsTo('App\StatusBayar', 'id_status', 'id_status');
-    }
+    protected $fillable = ['id_user', 'id_penjualan', 'id_status', 'tgl_pesan', 'jumlah', 'total_harga'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -52,17 +42,17 @@ class Pemesanan extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function jenisBarang()
+    public function status()
     {
-        return $this->belongsTo('App\JenisBarang', 'id_jenis');
+        return $this->belongsTo('App\Status', 'id_status');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function status()
+    public function penjualan()
     {
-        return $this->belongsTo('App\Status', 'id_status');
+        return $this->belongsTo('App\Penjualan', 'id_penjualan');
     }
 
     /**

@@ -23,6 +23,6 @@ class Pupuk extends Model
     /**
      * @var array
      */
-    protected $fillable = ['jenis', 'stock', 'harga', 'gambar'];
+    protected $fillable = ['nama', 'stock', 'harga', 'gambar'];
 
 }

@@ -44,6 +44,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:ADMIN']], func
     Route::get('/bahan-baku/delete/{id}', 'BahanBakuController@destroy');
 
     Route::get('/pembelian-bahan-baku', 'PembelianBahanBakuController@index');
+    Route::post('/pembelian-bahan-baku', 'PembelianBahanBakuController@store');
+
+    Route::get('/pemesanan', 'PemesananController@index');
+    Route::get('/pemesanan/konfirmasi-pembayaran/{id}', 'PemesananController@bayar');
+    Route::post('/pemesanan/konfirmasi-pembayaran/', 'PemesananController@storeBayar');
 });
 
 Route::get('/test', function(){

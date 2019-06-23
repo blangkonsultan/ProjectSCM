@@ -4,6 +4,7 @@
     <li><a href="{{ url('/admin/pelanggan') }}"><i class="fa fa-home"></i> Pelanggan</a>
     <li><a href="{{ url('/admin/bahan-baku') }}"><i class="fa fa-home"></i> Bahan Baku</a>
     <li><a href="{{ url('/admin/pembelian-bahan-baku') }}"><i class="fa fa-home"></i> Pembelian Bahan Baku</a>
+    <li><a href="{{ url('/admin/pemesanan') }}"><i class="fa fa-home"></i> Pemesanan</a>
     {{--<li><a href="{{ route('catatan-bayi.index') }}"><i class="fa fa-home"></i> Catatan Bayi</a>--}}
     {{--</li>--}}
     {{--<li><a><i class="fa fa-edit"></i> Register KMS <span class="fa fa-chevron-down"></span></a>--}}

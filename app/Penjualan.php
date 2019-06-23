@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property int $id
  * @property int $id_user
- * @property int $id_bahan_baku
+ * @property int $id_jenis
+ * @property int $id_barang
  * @property int $stok
  * @property int $harga
  * @property User $user
- * @property BahanBaku $bahanBaku
+ * @property JenisBarang $jenisBarang
+ * @property Pemesanan[] $pemesanans
  */
 class Penjualan extends Model
 {
@@ -25,7 +27,7 @@ class Penjualan extends Model
     /**
      * @var array
      */
-    protected $fillable = ['id_user', 'id_bahan_baku', 'stok', 'harga'];
+    protected $fillable = ['id_user', 'id_jenis', 'id_barang', 'stok', 'harga'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -38,8 +40,16 @@ class Penjualan extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function bahanBaku()
+    public function jenisBarang()
     {
-        return $this->belongsTo('App\BahanBaku', 'id_bahan_baku');
+        return $this->belongsTo('App\JenisBarang', 'id_jenis');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function pemesanans()
+    {
+        return $this->hasMany('App\Pemesanan', 'id_penjualan');
     }
 }
