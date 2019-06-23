@@ -25,11 +25,20 @@ Route::get('logout', function(){
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:ADMIN']], function(){
-    Route::get('/', 'AdminController@index');
+    Route::redirect('/', '/admin/pupuk');
+
+    Route::get('/pupuk', 'PupukController@index');
     Route::get('/tambah-pupuk', 'PupukController@create');
-    Route::get('/penjadwalan', 'AdminController@showPenjadwalan');
-    Route::get('/pemesanan', 'AdminController@showPemesanan');
-    Route::get('/pelanggan', 'AdminController@showPelanggan');
+    Route::post('/tambah-pupuk', 'PupukController@store');
+    Route::post('/edit-pupuk', 'PupukController@update');
+    Route::get('/pupuk/edit/{id}', 'PupukController@edit');
+    Route::get('/pupuk/delete/{id}', 'PupukController@destroy');
+
+    Route::get('/pelanggan', 'PelangganController@index');
+    Route::get('/pelanggan/edit/{id}', 'PelangganController@edit');
+    Route::post('/pelanggan/edit-pelanggan', 'PelangganController@update');
+
+    Route::get('/bahan-baku', 'BahanBakuController@index');
 });
 
 Route::get('/test', function(){

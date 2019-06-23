@@ -1,67 +1,78 @@
-@extends('layouts.base-admin')
-@section('title', 'Tambah Data Pupuk')
+@extends('layouts.base')
+
+@section('title', 'Tambah Pupuk')
+
+@section('css')
+
+@endsection
 
 @section('content')
-    <div class="container col-md-4 col-md-offset-4"
-         style="background-color: #818481a1;
-    border-radius: 10px;
-    padding-bottom: 20px;">
-        <div class="form-card" style="
-    background-color: rgba(0, 0, 0, 0.80);
-    padding: 10px 30px;
-    border-radius: 10px;
-">
-            <h3 style="color: #fefefe">Masukkan Data Pupuk <span class="label label-default"></span></h3>
-            <!-- form masukkan data padi -->
-            <form method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label style="color: #fefefe" for="name">Nama Pupuk :</label>
-                    <input type="Name" name="nama_pupuk" class="form-control" id="nameJenisPadi" placeholder="Nama Pupuk">
+    <form id="demo-form" data-parsley-validate class="form-horizontal form-label-left" method="post"
+          action="{{ url('/admin/tambah-pupuk') }}" enctype="multipart/form-data">
+        @csrf
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Tambah Data Pupuk</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+
+                    </ul>
+                    <div class="clearfix"></div>
                 </div>
-                <div class="form-group">
-                    <label style="color: #fefefe" for="gambarpadi">gambar :</label>
-                    <input type="file" name="gambar" class="form-control" id="gambarpadi" placeholder="Gambar Pupuk">
+                <div class="x_content">
+                    <br/>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Nama Pupuk
+                            <span class="required"></span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" id="last-name" required="required"
+                                   class="form-control col-md-7 col-xs-12" name="nama">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Gambar
+                            <span class="required"></span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="file" id="last-name" required="required"
+                                   class="form-control col-md-7 col-xs-12" name="gambar">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Stock (kg)
+                            <span class="required"></span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" id="last-name" required="required"
+                                   class="form-control col-md-7 col-xs-12" name="stock">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Harga Rp
+                            <span class="required"></span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" id="last-name" required="required"
+                                   class="form-control col-md-7 col-xs-12" name="harga">
+                        </div>
+                    </div>
+
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                            <button class="btn btn-primary" type="button"
+                                    onclick="window.location = '{{ url('/admin') }}'">Cancel
+                            </button>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="form-group">
-                    <label style="color: #fefefe" for="JenisPupuk">Jenis Pupuk :</label>
-                    <select class="form-control" name="Jenis_pupuk">
-                        <option>Pupuk Hijau</option>
-                        <option>Pupuk Hayati Organik</option>
-                        <option>Pupuk Kandang</option>
-                        <option>Pupuk Kompos</option>
-                        <option>Pupuk Lainnya...</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label style="color: #fefefe" for="Name">Stok Pupuk :</label>
-                    <input type="Name" name="stok_pupuk" class="form-control" id="stok" placeholder="/Kg">
-                </div>
-                <div class="form-group">
-                    <label style="color: #fefefe" for="Tipe">Tipe :</label>
-                    <select class="form-control" name="Tipe">
-                        <option>Kering</option>
-                        <option>Cair</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label style="color: #fefefe" for="price">Harga :</label>
-                    <input type="price" name="harga" class="form-control" id="price" placeholder="Rp">
-                </div>
-                <div class="form-group">
-                    <label style="color: #fefefe" for="comment">Detail Pupuk :</label>
-                    <textarea class="form-control" name="detail_pupuk" rows="5" id="comment"></textarea>
-                </div>
-                <div class="form-group">
-                    <label style="color: #fefefe" for="date">Tanggal Masuk :</label>
-                    <input type="date" name="tgl_masuk" class="form-control" id="date1" placeholder="tanggal masuk ">
-                </div>
-                <div class="form-group">
-                    <label style="color: #fefefe" for="date">Tanggal Keluar :</label>
-                    <input type="date" name="tgl_keluar" class="form-control" id="date2" placeholder="tanggal keluar ">
-                </div>
-                <button type="submit" class="btn btn-default" name="btnsubmit">Submit</button>
-                <a class="btn btn-primary" href="lihat_padi.php"><span>Lihat Data Padi</span></a>
-            </form>
+            </div>
         </div>
-    </div>
+    </form>
+@endsection
+
+@section('js')
+
 @endsection
