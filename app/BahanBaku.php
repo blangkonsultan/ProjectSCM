@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class BahanBaku extends Model
 {
+    public $timestamps = false;
     /**
      * The table associated with the model.
      * 
@@ -22,6 +23,6 @@ class BahanBaku extends Model
     /**
      * @var array
      */
-    protected $fillable = ['nama', 'stock', 'harga'];
+    protected $fillable = ['nama', 'stock'];
 
 }

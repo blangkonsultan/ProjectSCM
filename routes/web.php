@@ -39,6 +39,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:ADMIN']], func
     Route::post('/pelanggan/edit-pelanggan', 'PelangganController@update');
 
     Route::get('/bahan-baku', 'BahanBakuController@index');
+    Route::get('/tambah-bahan-baku', 'BahanBakuController@create');
+    Route::post('/tambah-bahan-baku', 'BahanBakuController@store');
+    Route::get('/bahan-baku/delete/{id}', 'BahanBakuController@destroy');
+
+    Route::get('/pembelian-bahan-baku', 'PembelianBahanBakuController@index');
 });
 
 Route::get('/test', function(){

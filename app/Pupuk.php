@@ -13,8 +13,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Pupuk extends Model
 {
-
-    public $timestamps = false;
     /**
      * The table associated with the model.
      * 

@@ -34,7 +34,7 @@ class User extends Authenticatable
     /**
      * @var array
      */
-    protected $fillable = ['id_level', 'name', 'email', 'no_hp', 'email_verified_at', 'alamat', 'no_ktp', 'password', 'no_hp', 'no_ijin'];
+    protected $fillable = ['id_level', 'name', 'email', 'email_verified_at', 'password', 'alamat', 'no_hp', 'no_ktp', 'no_ijin', 'remember_token'];
     protected $hidden = ['password', 'remember_token'];
 
     /**
@@ -48,4 +48,21 @@ class User extends Authenticatable
     public function getRole(){
         return $this->role()->first()->level;
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function pemesanans()
+    {
+        return $this->hasMany('App\Pemesanan', 'id_user');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function penjualans()
+    {
+        return $this->hasMany('App\Penjualan', 'id_user');
+    }
 }
+

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property int $id
  * @property string $status
+ * @property Pemesanan[] $pemesanans
  */
 class Status extends Model
 {
@@ -22,4 +23,11 @@ class Status extends Model
      */
     protected $fillable = ['status'];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function pemesanans()
+    {
+        return $this->hasMany('App\Pemesanan', 'id_status');
+    }
 }
