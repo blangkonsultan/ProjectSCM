@@ -11,7 +11,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Pemesanan</h2>
+                    <h2>Data Pemesanan Pelanggan</h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li>
                         </li>
@@ -24,37 +24,26 @@
                     <table id="anak-table" class="table table-striped table-bordered">
                         <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Tanggal</th>
-                            <th>Nama Produk</th>
-                            <th>Supplier</th>
-                            <th>Jumlah</th>
-                            <th>Harga</th>
-                            <th>Total</th>
-                            <th>Status</th>
+                            <th>ID Pemesanan</th>
+                            <th>Nama Pelanggan</th>
+                            <th>Tanggal Pembelian</th>
+                            <th>Total Pemesanan</th>
+                            <th>Status Pembayaran</th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($pemesanans as $no => $pemesanan)
                             <tr>
-                                <td>{{ $no+1 }}</td>
+                                @php($pemesanan = $pemesanan->first())
+                                <td>{{ $no }}</td>
+                                <td>{{ $pemesanan->user->name }}</td>
                                 <td>{{ $pemesanan->tgl_pesan }}</td>
-                                <td>{{ $pemesanan->barang->nama }}</td>
-                                <td>{{ $pemesanan->penjualan->user->name }}</td>
-                                <td>{{ $pemesanan->jumlah }}</td>
-                                <td>{{ $pemesanan->penjualan->harga }}</td>
                                 <td>{{ $pemesanan->total_harga }}</td>
                                 <td>{{ $pemesanan->status->status }}</td>
                                 <td>
-                                    @if($pemesanan->status->id == 1)
-                                        <a class="btn btn-primary"
-                                           href="{{ url('/admin/riwayat-pemesanan/konfirmasi-pembayaran/'.$pemesanan->id) }}">Bayar</a>
-                                        <a class="btn btn-danger"
-                                           href="{{ url('/admin/riwayat-pemesanan/hapus/'.$pemesanan->id) }}">Hapus</a>
-                                    @else
-                                        <a class="btn btn-primary" href="{{ url('/admin/riwayat-pemesanan/detail-pembayaran/' . $pemesanan->id ) }}">Detail</a>
-                                    @endif
+                                    <a class="btn btn-primary"
+                                       href="{{ url('/admin/pemesanan-pelanggan/detail/' . $pemesanan->id_pemesanan ) }}">Detail</a>
                                 </td>
                             </tr>
                         @endforeach

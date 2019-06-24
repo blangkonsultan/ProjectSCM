@@ -22,7 +22,7 @@ class PupukController extends Controller
         $file_content = $request->file('gambar');
         $file_path = '/uploads/' . Storage::disk('public_uploads')->put($path, $file_content);
         Pupuk::create([
-            'jenis' => $request->nama,
+            'nama' => $request->nama,
             'gambar' => $file_path,
             'stock' => $request->stock,
             'harga' => $request->harga

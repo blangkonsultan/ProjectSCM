@@ -11,16 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('login');
-});
-
 Auth::routes();
 
-Route::get('logout', function(){
+Route::get('/logout', function(){
   Auth::logout();
   return redirect('/login');
 });
+
+Route::redirect('/', '/login');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -38,6 +36,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:ADMIN']], func
     Route::get('/pelanggan/edit/{id}', 'PelangganController@edit');
     Route::post('/pelanggan/edit-pelanggan', 'PelangganController@update');
 
+    Route::get('/pemesanan-pelanggan', 'PemesananPetaniController@index');
+    Route::get('/pemesanan-pelanggan/detail/{id}', 'PemesananPetaniController@detail');
+    Route::get('/pemesanan-pelanggan/{id}/{status}', 'PemesananPetaniController@updateStatus');
+
     Route::get('/bahan-baku', 'BahanBakuController@index');
     Route::get('/tambah-bahan-baku', 'BahanBakuController@create');
     Route::post('/tambah-bahan-baku', 'BahanBakuController@store');
@@ -46,9 +48,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:ADMIN']], func
     Route::get('/pembelian-bahan-baku', 'PembelianBahanBakuController@index');
     Route::post('/pembelian-bahan-baku', 'PembelianBahanBakuController@store');
 
-    Route::get('/pemesanan', 'PemesananController@index');
-    Route::get('/pemesanan/konfirmasi-pembayaran/{id}', 'PemesananController@bayar');
-    Route::post('/pemesanan/konfirmasi-pembayaran/', 'PemesananController@storeBayar');
+    Route::get('/riwayat-pemesanan', 'PemesananAdminController@index');
+    Route::get('/riwayat-pemesanan/konfirmasi-pembayaran/{id}', 'PemesananAdminController@bayar');
+    Route::post('/riwayat-pemesanan/konfirmasi-pembayaran/', 'PemesananAdminController@storeBayar');
+    Route::get('/riwayat-pemesanan/detail-pembayaran/{id}', 'PemesananAdminController@detail');
 });
 
 Route::get('/test', function(){

@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Pemesanan extends Model
 {
+    public $timestamps = false;
     /**
      * The table associated with the model.
      * 
@@ -29,7 +30,7 @@ class Pemesanan extends Model
     /**
      * @var array
      */
-    protected $fillable = ['id_user', 'id_penjualan', 'id_status', 'tgl_pesan', 'jumlah', 'total_harga'];
+    protected $fillable = ['id_user', 'id_pemesanan', 'id_penjualan', 'id_status', 'tgl_pesan', 'jumlah', 'total_harga'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -60,6 +61,6 @@ class Pemesanan extends Model
      */
     public function pembayarans()
     {
-        return $this->hasMany('App\Pembayaran', 'id_pemesanan');
+        return $this->hasMany('App\Pembayaran', 'id_pemesanan', 'id_pemesanan');
     }
 }

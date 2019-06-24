@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
-class PemesananController extends Controller
+class PemesananAdminController extends Controller
 {
     public function index(){
         $pemesanans = Pemesanan::with('penjualan.user', 'status', 'user')->where('id_user', Auth::user()->id)->get();
@@ -26,6 +26,9 @@ class PemesananController extends Controller
 
     public function bayar($id){
         $pemesanan = Pemesanan::findOrFail($id);
+        if($pemesanan->id_status != 1){
+            return redirect()->back();
+        }
         return view('admin.tambah_pembayaran', compact('pemesanan'));
     }
 
@@ -46,11 +49,22 @@ class PemesananController extends Controller
             'bukti' => $file_path
         ]);
 
-        return redirect('/admin/pemesanan');
+        return redirect('/admin/riwayat-pemesanan');
     }
 
     public function destroy($id){
-        Pemesanan::findOrFail($id)->delete();
-        return redirect('/admin/pemesanan');
+        $pemesanan = Pemesanan::findOrFail($id)->delete();
+        if($pemesanan->id_status != 1){
+            return redirect()->back();
+        }
+        return redirect('/admin/riwayat-pemesanan');
+    }
+
+    public function detail($id){
+        $pembayaran = Pembayaran::with('pemesanan')->findOrFail($id);
+        if($pembayaran->id_status == 1){
+            return redirect()->back();
+        }
+        return view('admin.detail_pembayaran', compact('pembayaran'));
     }
 }

@@ -33,6 +33,6 @@ class Pembayaran extends Model
      */
     public function pemesanan()
     {
-        return $this->belongsTo('App\Pemesanan', 'id_pemesanan');
+        return $this->belongsTo('App\Pemesanan', 'id_pemesanan', 'id_pemesanan');
     }
 }
