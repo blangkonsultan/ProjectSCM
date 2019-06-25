@@ -25,7 +25,6 @@
                         <thead>
                         <tr>
                             <th>ID Pemesanan</th>
-                            <th>Nama Pelanggan</th>
                             <th>Tanggal Pembelian</th>
                             <th>Total Pemesanan</th>
                             <th>Status Pembayaran</th>
@@ -35,15 +34,15 @@
                         <tbody>
                         @foreach($pemesanans as $no => $pemesanan)
                             <tr>
+                                {{--<td>{{ $pemesanan }}</td>--}}
                                 @php($pemesanan = $pemesanan->first())
-                                <td>{{ $no }}</td>
-                                <td>{{ $pemesanan->user->name }}</td>
+                                <td>{{ $pemesanan->id_pemesanan }}</td>
                                 <td>{{ $pemesanan->tgl_pesan }}</td>
                                 <td>{{ $pemesanan->total }}</td>
                                 <td>{{ $pemesanan->status->status }}</td>
                                 <td>
                                     <a class="btn btn-primary"
-                                       href="{{ url('/admin/pemesanan-pelanggan/detail/' . $pemesanan->id_pemesanan ) }}">Detail</a>
+                                       href="{{ url('/petani/pembayaran/detail/' . $pemesanan->id_pemesanan ) }}">Detail</a>
                                 </td>
                             </tr>
                         @endforeach

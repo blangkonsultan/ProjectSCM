@@ -2,7 +2,10 @@
     <div class="menu_section">
         @if(\Illuminate\Support\Facades\Auth::user()->getRole() == 'ADMIN')
             @include('includes.menu.admin')
-        @else
+        @elseif(\Illuminate\Support\Facades\Auth::user()->getRole() == 'SUPPLIER')
+            @include('includes.menu.supplier')
+        @elseif(\Illuminate\Support\Facades\Auth::user()->getRole() == 'PETANI')
+            @include('includes.menu.petani')
         @endif
     </div>
 </div>

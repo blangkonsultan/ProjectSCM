@@ -1,6 +1,6 @@
 @extends('layouts.base')
 
-@section('title', 'Riwayat Pemesanan')
+@section('title', 'Data Pupuk')
 
 @section('css')
 
@@ -11,39 +11,39 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Data Pemesanan Pelanggan</h2>
+                    <h2>Data Pupuk</h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li>
+                            <button type="button" class="btn btn-success"
+                                    onclick="window.location='{{ url('/supplier/penjualan/tambah-penjualan') }}';">Tambah
+                            </button>
                         </li>
                     </ul>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
                     <p class="text-muted font-13 m-b-30">
+                        {{--Text--}}
                     </p>
                     <table id="anak-table" class="table table-striped table-bordered">
                         <thead>
                         <tr>
-                            <th>ID Pemesanan</th>
-                            <th>Nama Pelanggan</th>
-                            <th>Tanggal Pembelian</th>
-                            <th>Total Pemesanan</th>
-                            <th>Status Pembayaran</th>
+                            <th>No</th>
+                            <th>Nama Bahan</th>
+                            <th>Stock</th>
+                            <th>Harga</th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($pemesanans as $no => $pemesanan)
+                        @foreach($penjualans as $no => $penjualan)
                             <tr>
-                                @php($pemesanan = $pemesanan->first())
-                                <td>{{ $no }}</td>
-                                <td>{{ $pemesanan->user->name }}</td>
-                                <td>{{ $pemesanan->tgl_pesan }}</td>
-                                <td>{{ $pemesanan->total }}</td>
-                                <td>{{ $pemesanan->status->status }}</td>
+                                <td>{{ $no + 1 }}</td>
+                                <td>{{ $penjualan->barang->nama }}</td>
+                                <td>{{ $penjualan->stok }}</td>
+                                <td>{{ $penjualan->harga }}</td>
                                 <td>
-                                    <a class="btn btn-primary"
-                                       href="{{ url('/admin/pemesanan-pelanggan/detail/' . $pemesanan->id_pemesanan ) }}">Detail</a>
+                                    <a class="btn btn-primary" href="{{ url('/supplier/penjualan/edit-penjualan/' . $penjualan->id) }}">Edit</a>
                                 </td>
                             </tr>
                         @endforeach

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
 use App\Pemesanan;
 use Illuminate\Http\Request;
@@ -14,7 +15,17 @@ class PemesananPetaniController extends Controller
                 $q->where('id_jenis', 2);
             })
             ->get()->groupBy('id_pemesanan');
-//        return $pemesanans;
+
+        foreach ($pemesanans as $id => $pemesanan_){
+            $total = 0;
+            foreach ($pemesanan_ as $p){
+                $total += $p->total_harga;
+            }
+            foreach ($pemesanan_ as $p){
+                $p->total = $total;
+            }
+        }
+
         return view('admin.lihat_pemesanan_pelanggan', compact('pemesanans'));
     }
 
@@ -28,7 +39,6 @@ class PemesananPetaniController extends Controller
         foreach ($pemesanans->first() as $pemesanan){
             $total += $pemesanan->total_harga;
         }
-//        return $pemesanans;
 
         return view('admin.lihat_detail_pemesanan_pelanggan', compact('pemesanans', 'pelanggan', 'total'));
     }

@@ -1,9 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
+use App\Penjualan;
 use App\Pupuk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class PupukController extends Controller
@@ -21,10 +24,17 @@ class PupukController extends Controller
         $path = '/pupuk';
         $file_content = $request->file('gambar');
         $file_path = '/uploads/' . Storage::disk('public_uploads')->put($path, $file_content);
-        Pupuk::create([
+        $pupuk = Pupuk::create([
             'nama' => $request->nama,
             'gambar' => $file_path,
             'stock' => $request->stock,
+            'harga' => $request->harga
+        ]);
+        Penjualan::create([
+            'id_user' => Auth::user()->id,
+            'id_jenis' => 2,
+            'id_barang' => $pupuk->id,
+            'stok' => $request->stock,
             'harga' => $request->harga
         ]);
 
