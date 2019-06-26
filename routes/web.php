@@ -67,6 +67,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:ADMIN'], 'name
     Route::get('/riwayat-pemesanan/konfirmasi-pembayaran/{id}', 'PemesananAdminController@bayar');
     Route::post('/riwayat-pemesanan/konfirmasi-pembayaran/', 'PemesananAdminController@storeBayar');
     Route::get('/riwayat-pemesanan/detail-pembayaran/{id}', 'PemesananAdminController@detail');
+
+    Route::get('/admin/penjadwalan', function(){
+        return "sepurane aku gak iso rek mumet wkwkwk";
+    });
 });
 
 
