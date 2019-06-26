@@ -41,13 +41,13 @@
                                 <td>{{ date('d/m/Y', strtotime($pemesanan->tgl_pesan)) }}</td>
                                 <td>{{ $pemesanan->barang->nama }}</td>
                                 <td>{{ $pemesanan->penjualan->harga }}</td>
-                                <td>{{ $pemesanan->penjualan->stok }}</td>
-                                <td>{{ $pemesanan->penjualan->stok * $pemesanan->penjualan->harga }}</td>
+                                <td>{{ $pemesanan->jumlah }}</td>
+                                <td>{{ $pemesanan->jumlah * $pemesanan->penjualan->harga }}</td>
                                 <td>{{ $pemesanan->status->status }}</td>
                                 <td>
-                                    @if($pemesanan->status->id == 1)
+                                    @if($pemesanan->id_status == 1)
 
-                                    @elseif($pemesanan->status->id == 2)
+                                    @elseif($pemesanan->id_status == 2)
                                         <a class="btn btn-primary"
                                            href="{{ url($pemesanan->pembayarans->first()->bukti) }}">Bukti</a>
                                         <a class="btn btn-success"

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\BahanBaku;
 use App\Pembayaran;
 use App\Pemesanan;
+use App\Penjualan;
 use App\Pupuk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,12 +39,13 @@ class PemesananAdminController extends Controller
         $file_content = $request->file('bukti');
         $file_path = '/uploads/' . Storage::disk('public_uploads')->put($path, $file_content);
 
-        Pemesanan::findOrFail($request->id)->update([
+        $pemesanan = Pemesanan::findOrFail($request->id);
+        $pemesanan->update([
             'id_status' => 2
         ]);
 
         Pembayaran::create([
-            'id_pemesanan' => $request->id,
+            'id_pemesanan' => $pemesanan->id_pemesanan,
             'nama' => $request->nama,
             'no_rek' => $request->no_rek,
             'tanggal_bayar' => date('Y-m-d'),
