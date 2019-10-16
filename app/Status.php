@@ -28,6 +28,6 @@ class Status extends Model
      */
     public function pemesanans()
     {
-        return $this->hasMany('App\Pemesanan', 'id_status');
+        return $this->hasMany(Pemesanan::class, 'id_status');
     }
 }
