@@ -23,7 +23,6 @@ class PupukController extends Controller
             'id_penjualan' => $request->id,
             'jumlah' => $request->jumlah
         ]);
-
         return redirect('/petani/pupuk');
     }
 

@@ -26,7 +26,6 @@ class BahanBakuController extends Controller
         $bahan = BahanBaku::findOrFail($id)->update([
             'stock' => 0
         ]);
-
         return redirect('/admin/bahan-baku');
     }
 }
